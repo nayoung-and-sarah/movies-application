@@ -10,7 +10,7 @@ sayHello('World');
  */
 const $ = require('jquery');
 
-const {getMovies} = require('./api.js');
+const {getMovies, postMovie} = require('./api.js');
 
 getMovies().then((movies) => {
     console.log('Here are all the movies:');
@@ -41,6 +41,9 @@ $(document).ready(() => {
     },1200);
 
     getMovies();
+    console.log(postMovie());
+
+
 
 
 });
