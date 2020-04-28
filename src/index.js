@@ -41,7 +41,7 @@ $(document).ready(() => {
     },1200);
 
     getMovies();
-    console.log(postMovie());
+    postMovie();
 
 
 
