@@ -17,13 +17,14 @@ getMovies().then((movies) => {
     movies.forEach(({title, rating, id}) => {
 
         let renderHTML = `<div class="card">
-          <div class="card-body"> 
-          <h5 class="card-title">${id} - ${title}</h5>
-     <p class="card-text">Rating: ${rating}</p>
-      </div></div>`;
+              <div class="card-body"> 
+                     <h5 class="card-title">${id} - ${title}</h5>
+                     <p class="card-text">Rating: ${rating}</p>
+               </div>
+            </div>`;
 
         // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
-        $('#test-paragraph').append(renderHTML);
+        $('.card-deck').append(renderHTML);
 
     });
 }).catch((error) => {
@@ -40,8 +41,13 @@ $(document).ready(() => {
        $('#spinner').hide()
     },1200);
 
+    //click to post movie
+    $('#submit').click(function(){
+        postMovie();
+    });
+
     getMovies();
-    postMovie();
+
 
 
 

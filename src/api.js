@@ -1,7 +1,10 @@
+
+const $ = require('jquery');
+
 const newMovie = {
     "title": "The Fellowship of the Ring",
     "rating": 5
-}
+};
 
 module.exports = {
 
@@ -11,7 +14,7 @@ module.exports = {
     },
 
     postMovie: () => {
-        fetch('api/movies', {
+        return fetch('api/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
