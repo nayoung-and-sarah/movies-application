@@ -10,7 +10,7 @@ sayHello('World');
  */
 const $ = require('jquery');
 
-const {getMovies} = require('./api.js');
+const {getMovies, postMovies} = require('./api.js');
 
 getMovies().then((movies) => {
     console.log('Here are all the movies:');
@@ -20,7 +20,7 @@ getMovies().then((movies) => {
           <div class="card-body"> 
           <h5 class="card-title">${id} - ${title}</h5>
      <p class="card-text">Rating: ${rating}</p>
-      </div></div>`
+      </div></div>`;
 
         // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
         $('#test-paragraph').append(renderHTML);
@@ -41,6 +41,7 @@ $(document).ready(() => {
     },1200);
 
     getMovies();
+    postMovies();
 
 
 });
