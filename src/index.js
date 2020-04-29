@@ -35,20 +35,20 @@ function updateMovies() {
         console.log(error);
     })
 }
+    // .then((rating, comment) => {
+// console.log('empty Object', emptyObject);
 
 // allow users to edit movies
 function userEditMovie() {
     let emptyObject = {
         rating: 4
     };
-    editMovie().then((rating, comment) => {
-        // console.log('empty Object', emptyObject);
 
         let renderForm = `
-<!--    <div class="form-group">-->
-<!--       <label for="exampleFormControlInput1">Movie Title</label>-->
-<!--         <input type="email" class="form-control" id="exampleFormControlInput1">-->
-<!--    </div>-->
+    <div class="form-group">
+       <label for="exampleFormControlInput1">Movie Title</label>
+         <input type="email" class="form-control" id="exampleFormControlInput1">
+    </div>
        <div class="form-group">
          <label for="exampleFormControlSelect1"> Rating</label>
          <select class="form-control edit-rating" id="exampleFormControlSelect1">
@@ -59,23 +59,34 @@ function userEditMovie() {
             <option>5</option>
         </select>
        </div>
-         <div class="form-group">
-            <label for="exampleFormControlTextarea1">Comment</label>
-            <textarea class="form-control edit-comment" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <button class="btn" id="submit-edit-btn">Submit edits</button>`;
+<!--         <div class="form-group">-->
+<!--            <label for="exampleFormControlTextarea1">Comment</label>-->
+<!--            <textarea class="form-control edit-comment" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+<!--        </div>-->
+        <div class="edit-btn-submit">
+            <button class="btn submit-edit-btn" data-id=${id}>Submit edits</button>
+        </div>`;
 
         $('.card-body').append(renderForm);
 
-        $('.btn').click(function () {
+        $('.submit-edit-btn').click(function () {
+            //get the data attr value
+                $(this).attr('data-id');
+
+
+            // let id = `${id}`;
+            // $('.edit-btn-submit').data('id') === 'id';
+
+
             let editRating = $('.edit-rating').val();
             let editComment =$('.edit-comment').val();
-            console.log(editRating, editComment);
+            console.log(editRating, editComment, id);
             console.log(this);
             $(this).parent().children().first().next().html(editRating);
         });
-    })
 }
+editMovie();
+userEditMovie().then
 
 
 $(document).ready(() => {
@@ -105,6 +116,8 @@ $(document).ready(() => {
 
         updateMovies();
     });
+
+
 
 
 });

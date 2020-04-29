@@ -25,7 +25,7 @@ module.exports = {
     },
 
     editMovie: (rating, comment) => {
-        return fetch('api/movies',{
+        return fetch(`api/movies/${id}`,{
             method:'PUT',
             headers: {
                 'Content-Type': 'application/json',
