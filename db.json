@@ -1,13 +1,13 @@
 {
   "movies": [
     {
-      "title": "Casablanca",
-      "rating": "4",
+      "title": "hobbit 3",
+      "rating": "1",
       "id": 1
     },
     {
-      "title": "Star Wars: A New Hope",
-      "rating": "5",
+      "title": "hobbit 3",
+      "rating": "1",
       "id": 2
     },
     {
@@ -19,6 +19,16 @@
       "title": "bolt",
       "rating": "4",
       "id": 4
+    },
+    {
+      "title": "hobbit 4",
+      "rating": "1",
+      "id": 5
+    },
+    {
+      "title": "godfather",
+      "rating": "1",
+      "id": 6
     }
   ]
 }

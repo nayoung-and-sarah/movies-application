@@ -23,13 +23,14 @@ function updateMovies() {
                      <div class="card-body">
                          <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
+                           <button data-id="${id}" class="edit-btn">Edit Movie</button>
                     </div>
                </div>`;
 
             $('.card-deck').append(renderHTML);
             // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
         });
-
+        $('.edit-btn').click(userEditMovie)
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
         console.log(error);
@@ -39,15 +40,19 @@ function updateMovies() {
 // console.log('empty Object', emptyObject);
 
 // allow users to edit movies
-function userEditMovie() {
-    let emptyObject = {
-        rating: 4
-    };
+function userEditMovie(e) {
+
+// console.log(e.target.dataset.id);
+    console.log($(e.target).parent());
+
+    let cardBody= $(e.target).parent();
+
+    let specificID = e.target.dataset.id;
 
         let renderForm = `
     <div class="form-group">
        <label for="exampleFormControlInput1">Movie Title</label>
-         <input type="email" class="form-control" id="exampleFormControlInput1">
+         <input type="text" class="form-control edit-title " id="exampleFormControlInput1">
     </div>
        <div class="form-group">
          <label for="exampleFormControlSelect1"> Rating</label>
@@ -64,14 +69,17 @@ function userEditMovie() {
 <!--            <textarea class="form-control edit-comment" id="exampleFormControlTextarea1" rows="3"></textarea>-->
 <!--        </div>-->
         <div class="edit-btn-submit">
-            <button class="btn submit-edit-btn" data-id=${id}>Submit edits</button>
+            <button class="btn submit-edit-btn" data-id="${specificID}">Submit edits</button>
         </div>`;
 
-        $('.card-body').append(renderForm);
+        cardBody.append(renderForm);
+
 
         $('.submit-edit-btn').click(function () {
             //get the data attr value
-                $(this).attr('data-id');
+            console.log(specificID);
+                $(this).attr('data-id', specificID);
+
 
 
             // let id = `${id}`;
@@ -79,14 +87,21 @@ function userEditMovie() {
 
 
             let editRating = $('.edit-rating').val();
-            let editComment =$('.edit-comment').val();
-            console.log(editRating, editComment, id);
+            let editTitle =$('.edit-title').val();
+            // editMovie = (id,{
+            //     "title":editRating,
+            //     "rating":editComment
+            // });
+            console.log(editTitle,editRating, specificID);
             console.log(this);
-            $(this).parent().children().first().next().html(editRating);
+            editMovie(editTitle,editRating,specificID)
+                .then (updateMovies)
+            // $(this).parent().children().first().next().html(editRating);
         });
+
 }
-editMovie();
-userEditMovie().then
+// editMovie();
+// userEditMovie().then
 
 
 $(document).ready(() => {
@@ -94,9 +109,7 @@ $(document).ready(() => {
     $('#spinner').html(`<div class="spinner-border" role="status">
   <span class="sr-only">Loading...</span></div>`);
 
-    $('#edit-btn').click(function () {
-        userEditMovie();
-    });
+
 
     updateMovies(); // render the HTML before button is clicked
 
@@ -116,6 +129,12 @@ $(document).ready(() => {
 
         updateMovies();
     });
+
+
+
+
+
+
 
 
 
