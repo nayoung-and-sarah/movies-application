@@ -1,7 +1,8 @@
-const newMovie = {
-    "title": "The Fellowship of the Ring",
-    "rating": 5
-}
+ const newMovie = {
+        "title": "10 Things",
+        "rating": 5
+};
+
 
 module.exports = {
 
@@ -11,7 +12,8 @@ module.exports = {
     },
 
     postMovie: () => {
-        fetch('api/movies', {
+
+         fetch('api/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,5 +25,4 @@ module.exports = {
             .catch( error => console.error(error) );
     }
 
-
-};
+ };
