@@ -13,18 +13,19 @@ const $ = require('jquery');
 const {getMovies, postMovie} = require('./api.js');
 
 getMovies().then((movies) => {
-    console.log('Here are all the movies:');
-    movies.forEach(({title, rating, id}) => {
+    console.log('Here are all the movies:', movies);
 
+    movies.forEach(({title, rating, id}) => {
         let renderHTML = `<div class="card">
               <div class="card-body"> 
-                     <h5 class="card-title">${id} - ${title}</h5>
-                     <p class="card-text">Rating: ${rating}</p>
+                     <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
+                     <p id="movie-rating" class="card-text">Rating: ${rating}</p>
                </div>
             </div>`;
 
-        // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
         $('.card-deck').append(renderHTML);
+        // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
+
 
     });
 }).catch((error) => {
@@ -41,9 +42,22 @@ $(document).ready(() => {
        $('#spinner').hide()
     },1200);
 
+
     //click to post movie
-    $('#submit').click(function(){
-        postMovie();
+    $('#submit').click(function(e){
+        e.preventDefault();
+        let movieTitle = $('.search-term').val();
+        let movieRating = $('.movie-rating').val();
+        console.log(movieTitle, movieRating);
+
+        postMovie({ // postMovie function
+            "title": movieTitle, //adding user input from form
+            "rating": movieRating // adding user rating from form
+        });
+        getMovies(); // calls the getMovies function to compile
+
+
+
     });
 
     getMovies();

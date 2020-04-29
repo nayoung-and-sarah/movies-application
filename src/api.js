@@ -1,29 +1,29 @@
-
 const $ = require('jquery');
 
+let inputValue = $('.search-term').val('');
+
 const newMovie = {
-    "title": "The Fellowship of the Ring",
+    "title": inputValue,
     "rating": 5
 };
 
 module.exports = {
 
-    getMovies: () => {
+    getMovies: (title, rating) => {
         return fetch('api/movies')
             .then(response => response.json());
     },
 
-    postMovie: () => {
+    postMovie: (title, rating) => {
         return fetch('api/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(newMovie),
+            body: JSON.stringify(title, rating),
         })
-            .then( response => response.json() )
-            .then( data => console.log(data) )
-            .catch( error => console.error(error) );
+            .then(response => response.json())
+            .then(data => console.log(data));
     }
 
 
