@@ -11,14 +11,9 @@
       "id": 2
     },
     {
-      "title": "lord of the rings",
+      "title": "The Godfather",
       "rating": "1",
       "id": 3
-    },
-    {
-      "title": "The Godfather",
-      "rating": "5",
-      "id": 4
     }
   ]
 }

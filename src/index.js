@@ -12,26 +12,6 @@ const $ = require('jquery');
 
 const {getMovies, postMovie} = require('./api.js');
 
-getMovies().then((movies) => {
-    console.log('Here are all the movies:', movies);
-
-    movies.forEach(({title, rating, id}) => {
-        let renderHTML = `<div class="card">
-              <div class="card-body"> 
-                     <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
-                     <p id="movie-rating" class="card-text">Rating: ${rating}</p>
-               </div>
-            </div>`;
-
-        $('.card-deck').append(renderHTML);
-        // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
-
-
-    });
-}).catch((error) => {
-    alert('Oh no! Something went wrong.\nCheck the console for details.');
-    console.log(error);
-});
 
 $(document).ready(() => {
 
@@ -41,6 +21,7 @@ $(document).ready(() => {
     setTimeout(function(){
        $('#spinner').hide()
     },1200);
+
 
 
     //click to post movie
@@ -54,13 +35,32 @@ $(document).ready(() => {
             "title": movieTitle, //adding user input from form
             "rating": movieRating // adding user rating from form
         });
-        getMovies(); // calls the getMovies function to compile
+
+        //print movies into dom
+        getMovies().then((movies) => {
+            console.log('Here are all the movies:', movies);
+
+            movies.forEach(({title, rating, id}) => {
+                let renderHTML = `<div class="card">
+              <div class="card-body"> 
+                     <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
+                     <p id="movie-rating" class="card-text">Rating: ${rating}</p>
+               </div>
+            </div>`;
+
+                $('.card-deck').append(renderHTML);
+                // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
 
 
+            });
+        }).catch((error) => {
+            alert('Oh no! Something went wrong.\nCheck the console for details.');
+            console.log(error);
+        });
 
     });
 
-    getMovies();
+
 
 
 
