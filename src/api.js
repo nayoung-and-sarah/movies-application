@@ -1,11 +1,9 @@
-const $ = require('jquery');
 
-let inputValue = $('.search-term').val('');
-
-const newMovie = {
-    "title": inputValue,
-    "rating": 5
-};
+//
+// const newMovie = {
+//     "title": inputValue,
+//     "rating": 5
+// };
 
 module.exports = {
 

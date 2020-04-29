@@ -11,37 +11,39 @@ sayHello('World');
 const $ = require('jquery');
 
 const {getMovies, postMovie} = require('./api.js');
-getMovies().then((movies) => {
-    console.log('Here are all the movies:', movies);
 
-    movies.forEach(({title, rating, id}) => {
-        let renderHTML = `<div class="card">
-              <div class="card-body"> 
-                     <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
-                     <p id="movie-rating" class="card-text">Rating: ${rating}</p>
-               </div>
+function updateMovies() {
+    getMovies().then((movies) => {
+        console.log('Here are all the movies:', movies);
+        $('#spinner').hide();
+        $('.card-deck').html('');
+        movies.forEach(({title, rating, id}) => {
+            let renderHTML =
+                `<div class="card">
+                <div class="card-body"> 
+                    <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
+                    <p id="movie-rating" class="card-text">Rating: ${rating}</p>
+                </div>
             </div>`;
 
-        $('.card-deck').append(renderHTML);
-        // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
+            $('.card-deck').append(renderHTML);
+            // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
+        });
 
-
-    });
-}).catch((error) => {
-    alert('Oh no! Something went wrong.\nCheck the console for details.');
-    console.log(error);
-});
+    }).catch((error) => {
+        alert('Oh no! Something went wrong. Check the console for details.');
+        console.log(error);
+    })
+}
 
 $(document).ready(() => {
 
+    //loading spinner
         $('#spinner').html(`<div class="spinner-border" role="status">
   <span class="sr-only">Loading...</span></div>`);
 
-    setTimeout(function(){
-       $('#spinner').hide()
-    },1200);
 
-
+    updateMovies(); // render the HTML before button is clicked
 
     //click to post movie
     $('#submit').click(function(e){
@@ -55,9 +57,11 @@ $(document).ready(() => {
             "rating": movieRating // adding user rating from form
         });
 
-
+       updateMovies();
 
     });
+
+// 1. clicking submit to add to page without hard refresh
 
 
 

@@ -11,7 +11,7 @@
       "id": 2
     },
     {
-      "title": "The Godfather",
+      "title": "lord of the rings",
       "rating": "1",
       "id": 3
     },
@@ -26,24 +26,54 @@
       "id": 5
     },
     {
-      "title": "The Godfather",
+      "title": "lord of the rings",
       "rating": "1",
       "id": 6
     },
     {
-      "title": "The Godfather",
+      "title": "lord of the rings",
       "rating": "1",
       "id": 7
     },
     {
-      "title": "The Godfather",
+      "title": "lord of the rings",
       "rating": "1",
       "id": 8
     },
     {
-      "title": "Fi",
+      "title": "lord of the rings",
       "rating": "1",
       "id": 9
+    },
+    {
+      "title": "lord of the rings 2",
+      "rating": "1",
+      "id": 10
+    },
+    {
+      "title": "lord of the rings 3",
+      "rating": "1",
+      "id": 11
+    },
+    {
+      "title": "hobbit",
+      "rating": "1",
+      "id": 12
+    },
+    {
+      "title": "hobbit 2",
+      "rating": "1",
+      "id": 13
+    },
+    {
+      "title": "hobbit 3",
+      "rating": "1",
+      "id": 14
+    },
+    {
+      "title": "hobbit 4",
+      "rating": "1",
+      "id": 15
     }
   ]
 }
