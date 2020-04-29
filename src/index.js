@@ -22,7 +22,7 @@ function updateMovies() {
                 `<div class="card">
                      <div class="card-body">
                          <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
-                         <p id="movie-rating" class="card-text">Rating: ${rating}</p>
+                         <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
                     </div>
                </div>`;
 
@@ -37,16 +37,21 @@ function updateMovies() {
 }
 
 // allow users to edit movies
-function userEditMovie(){
+function userEditMovie() {
+    let emptyObject = {
+        rating: 4
+    };
+    editMovie().then((rating, comment) => {
+        // console.log('empty Object', emptyObject);
 
-    let renderForm =`
-    <div class="form-group">
-       <label for="exampleFormControlInput1">Email address</label>
-         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
+        let renderForm = `
+<!--    <div class="form-group">-->
+<!--       <label for="exampleFormControlInput1">Movie Title</label>-->
+<!--         <input type="email" class="form-control" id="exampleFormControlInput1">-->
+<!--    </div>-->
        <div class="form-group">
-         <label for="exampleFormControlSelect1">Example select</label>
-         <select class="form-control" id="exampleFormControlSelect1">
+         <label for="exampleFormControlSelect1"> Rating</label>
+         <select class="form-control edit-rating" id="exampleFormControlSelect1">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -55,29 +60,38 @@ function userEditMovie(){
         </select>
        </div>
          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="exampleFormControlTextarea1">Comment</label>
+            <textarea class="form-control edit-comment" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <button>Submit</button>`;
+        <button class="btn" id="submit-edit-btn">Submit edits</button>`;
 
-    $('.card').append(renderForm);
+        $('.card-body').append(renderForm);
+
+        $('.btn').click(function () {
+            let editRating = $('.edit-rating').val();
+            let editComment =$('.edit-comment').val();
+            console.log(editRating, editComment);
+            console.log(this);
+            $(this).parent().children().first().next().html(editRating);
+        });
+    })
 }
 
 
 $(document).ready(() => {
     //loading spinner
-        $('#spinner').html(`<div class="spinner-border" role="status">
+    $('#spinner').html(`<div class="spinner-border" role="status">
   <span class="sr-only">Loading...</span></div>`);
 
-    $('#edit-btn').click(function(){
+    $('#edit-btn').click(function () {
         userEditMovie();
     });
 
     updateMovies(); // render the HTML before button is clicked
 
     //click to post movie
-    $('#submit').click(function(e){
-      e.preventDefault();
+    $('#submit').click(function (e) {
+        e.preventDefault();
         let movieTitle = $('.search-term').val();
         let movieRating = $('.movie-rating').val();
         console.log(movieTitle, movieRating);
@@ -89,16 +103,8 @@ $(document).ready(() => {
 
         $('#exampleFormControlInput1').empty();
 
-       updateMovies();
+        updateMovies();
     });
-
-
-
-
-
-
-
-
 
 
 });

@@ -24,13 +24,13 @@ module.exports = {
             .then(data => console.log(data));
     },
 
-    editMovie: (title,rating) => {
+    editMovie: (rating, comment) => {
         return fetch('api/movies',{
             method:'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(title, rating),
+            body: JSON.stringify(rating,comment),
         })
             .then(response => response.json())
             .then( data => console.log(data));
