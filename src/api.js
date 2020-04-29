@@ -34,6 +34,18 @@ module.exports = {
         })
             .then(response => response.json())
             .then( data => console.log(data));
+    },
+
+    deleteMovie: (title, rating,id) => {
+        return fetch(`api/movies/${id}`,{
+            method:'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({title: title, rating: rating, id: id}),
+        })
+            .then(response => response.json())
+            .then( data => console.log(data));
     }
 
 

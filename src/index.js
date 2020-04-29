@@ -10,7 +10,7 @@ sayHello('World');
  */
 const $ = require('jquery');
 
-const {getMovies, postMovie, editMovie} = require('./api.js');
+const {getMovies, postMovie, editMovie,deleteMovie} = require('./api.js');
 
 function updateMovies() {
     getMovies().then((movies) => {
@@ -24,6 +24,7 @@ function updateMovies() {
                          <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
                            <button data-id="${id}" class="edit-btn">Edit Movie</button>
+                           <button data-id="${id}" class="delete-btn">Delete Movie</button>
                     </div>
                </div>`;
 
@@ -31,19 +32,19 @@ function updateMovies() {
             // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
         });
         $('.edit-btn').click(userEditMovie)
+
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
         console.log(error);
     })
 }
-    // .then((rating, comment) => {
-// console.log('empty Object', emptyObject);
+
 
 // allow users to edit movies
 function userEditMovie(e) {
 
 // console.log(e.target.dataset.id);
-    console.log($(e.target).parent());
+//     console.log($(e.target).parent());
 
     let cardBody= $(e.target).parent();
 
@@ -64,44 +65,31 @@ function userEditMovie(e) {
             <option>5</option>
         </select>
        </div>
-<!--         <div class="form-group">-->
-<!--            <label for="exampleFormControlTextarea1">Comment</label>-->
-<!--            <textarea class="form-control edit-comment" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-<!--        </div>-->
         <div class="edit-btn-submit">
             <button class="btn submit-edit-btn" data-id="${specificID}">Submit edits</button>
         </div>`;
 
         cardBody.append(renderForm);
 
-
         $('.submit-edit-btn').click(function () {
             //get the data attr value
             console.log(specificID);
                 $(this).attr('data-id', specificID);
-
-
-
-            // let id = `${id}`;
-            // $('.edit-btn-submit').data('id') === 'id';
-
-
             let editRating = $('.edit-rating').val();
             let editTitle =$('.edit-title').val();
-            // editMovie = (id,{
-            //     "title":editRating,
-            //     "rating":editComment
-            // });
+
             console.log(editTitle,editRating, specificID);
             console.log(this);
             editMovie(editTitle,editRating,specificID)
-                .then (updateMovies)
-            // $(this).parent().children().first().next().html(editRating);
+                .then (updateMovies) // run after ajax
         });
 
 }
-// editMovie();
-// userEditMovie().then
+function deleteFunction(e){
+
+}
+
+$('.delete-btn').click(deleteFunction);
 
 
 $(document).ready(() => {
