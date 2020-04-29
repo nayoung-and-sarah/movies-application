@@ -47,7 +47,7 @@ $(document).ready(() => {
 
     //click to post movie
     $('#submit').click(function(e){
-        e.preventDefault();
+      e.preventDefault();
         let movieTitle = $('.search-term').val();
         let movieRating = $('.movie-rating').val();
         console.log(movieTitle, movieRating);
@@ -57,11 +57,15 @@ $(document).ready(() => {
             "rating": movieRating // adding user rating from form
         });
 
+        $('#exampleFormControlInput1').empty();
+
        updateMovies();
+
+
+
 
     });
 
-// 1. clicking submit to add to page without hard refresh
 
 
 
