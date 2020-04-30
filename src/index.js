@@ -21,10 +21,12 @@ function updateMovies() {
             let renderHTML =
                 `<div class="card">
                      <div class="card-body">
-                         <h5 id="movie-title" class="card-title">${id} - ${title}</h5>
+                         <h5 id="movie-title" class="card-title">${id}- ${title}</h5>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
-                           <button data-id="${id}" class="edit-btn">Edit Movie</button>
-                           <button data-id="${id}" class="delete-btn">Delete Movie</button>
+                         <div>
+                          <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
+                          <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
+                          </div>
                     </div>
                </div>`;
 
@@ -52,7 +54,7 @@ function userEditMovie(e) {
     let specificID = e.target.dataset.id;
 
         let renderForm = `
-    <div class="form-group">
+    <div class="form-group mt-3">
        <label for="exampleFormControlInput1">Movie Title</label>
          <input type="text" class="form-control edit-title " id="exampleFormControlInput1">
     </div>
@@ -67,7 +69,7 @@ function userEditMovie(e) {
         </select>
        </div>
         <div class="edit-btn-submit">
-            <button class="btn submit-edit-btn" data-id="${specificID}">Submit edits</button>
+            <button class="btn btn-outline-dark submit-edit-btn" data-id="${specificID}">Submit edits</button>
         </div>`;
 
         cardBody.append(renderForm);
@@ -84,8 +86,8 @@ function userEditMovie(e) {
             editMovie(editTitle,editRating,specificID)
                 .then (updateMovies) // run after ajax
         });
-
 }
+
 function deleteFunction(e){
     // let cardBody= $(e.target).parent();
     let specificID = e.target.dataset.id;
@@ -93,9 +95,6 @@ function deleteFunction(e){
     // console.log(specificID);
     deleteMovie(specificID)
         .then(updateMovies);
-    // deleteMovie($(this).data("id"))
-    //     .then(updateMovies)
-
 }
 
 //
@@ -120,23 +119,16 @@ $(document).ready(() => {
         let movieRating = $('.movie-rating').val();
         console.log(movieTitle, movieRating);
 
-        postMovie({ // postMovie function
-            "title": movieTitle, //adding user input from form
-            "rating": movieRating // adding user rating fr  om form
-        });
+        //access the object by using getMovies function
+        postMovie(movieTitle,movieRating);
 
+        // postMovie({ // postMovie function
+        //     "title": movieTitle, //adding user input from form
+        //     "rating": movieRating // adding user rating from form
+        // });
         $('#exampleFormControlInput1').empty();
-
         updateMovies();
     });
-
-
-
-
-
-
-
-
 
 
 });

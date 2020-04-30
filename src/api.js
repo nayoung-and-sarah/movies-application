@@ -12,13 +12,13 @@ module.exports = {
             .then(response => response.json());
     },
 
-    postMovie: (title, rating) => {
+    postMovie: (title, rating,id) => {
         return fetch('api/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(title, rating),
+            body: JSON.stringify({title, rating,id}),
         })
             .then(response => response.json())
             .then(data => console.log(data));
