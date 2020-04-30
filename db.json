@@ -1,27 +1,17 @@
 {
   "movies": [
     {
-      "title": "harry potter 1",
-      "rating": "1",
-      "id": 6
-    },
-    {
-      "title": "Harry Potter 4",
-      "rating": "1",
-      "id": 7
-    },
-    {
-      "title": "harry potter 2",
+      "title": "test",
       "rating": "1",
       "id": 8
     },
     {
-      "title": "harry potter 7",
+      "title": "test",
       "rating": "1",
       "id": 9
     },
     {
-      "title": "harry potter 7",
+      "title": "avengers",
       "rating": "1",
       "id": 10
     },
@@ -29,6 +19,11 @@
       "title": "harry potter 1",
       "rating": "1",
       "id": 11
+    },
+    {
+      "title": "WORK",
+      "rating": "1",
+      "id": 12
     }
   ]
 }

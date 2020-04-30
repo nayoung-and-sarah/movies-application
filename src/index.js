@@ -21,7 +21,9 @@ function updateMovies() {
             let renderHTML =
                 `<div class="card">
                      <div class="card-body">
-                         <h5 id="movie-title" class="card-title"> ${id}- ${title}</h5>
+                        <div class="new-movie-title">
+                            <h5 id="movie-title" class="card-title"> ${title}</h5>
+                         </div>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
                          <div>
                              <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
@@ -52,8 +54,8 @@ function userEditMovie(e) {
 
     let renderForm = `
         <div class="form-group mt-3">
-             <label for="exampleFormControlInput1">Movie Title</label>
-             <input type="text" class="form-control edit-title " id="exampleFormControlInput1">
+             <label for="edit-form">Movie Title</label>
+             <input type="text" class="form-control edit-form edit-title" id="${specificID}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1"> Rating</label>
@@ -73,7 +75,10 @@ function userEditMovie(e) {
 
     $('.submit-edit-btn').click(function () {
         //get the data attr value
+
         $(this).attr('data-id', specificID);
+        $('.card-title').attr('class',specificID);
+
         let editRating = $('.edit-rating').val();
         let editTitle = $('.edit-title').val();
         console.log(editTitle, editRating, specificID);
