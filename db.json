@@ -1,16 +1,6 @@
 {
   "movies": [
     {
-      "title": "hobbit 3",
-      "rating": "1",
-      "id": 1
-    },
-    {
-      "title": "hobbit 3",
-      "rating": "1",
-      "id": 2
-    },
-    {
       "title": "Lord of the Rings",
       "rating": "2",
       "id": 3

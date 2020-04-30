@@ -31,7 +31,8 @@ function updateMovies() {
             $('.card-deck').append(renderHTML);
             // $('#test-paragraph').append(`id#${id} - ${title} - rating: ${rating}`);
         });
-        $('.edit-btn').click(userEditMovie)
+        $('.edit-btn').click(userEditMovie);
+        $('.delete-btn').click(deleteFunction)
 
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
@@ -86,10 +87,21 @@ function userEditMovie(e) {
 
 }
 function deleteFunction(e){
+    // let cardBody= $(e.target).parent();
+    let specificID = e.target.dataset.id;
+    // console.log(cardBody);
+    // console.log(specificID);
+    deleteMovie(specificID)
+        .then(updateMovies);
+    // deleteMovie($(this).data("id"))
+    //     .then(updateMovies)
 
 }
 
-$('.delete-btn').click(deleteFunction);
+//
+// $('.delete-btn').click(function(){
+//     console.log("this works")
+// });
 
 
 $(document).ready(() => {
