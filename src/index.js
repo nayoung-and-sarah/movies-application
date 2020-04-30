@@ -21,6 +21,9 @@ function updateMovies() {
             let renderHTML =
                 `<div class="card specific-card" data-id="${id}">
                      <div class="card-body">
+                        <button type="button" class="close after-edit-close" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
                         <div class="new-movie-title">
                             <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
                          </div>
@@ -42,6 +45,11 @@ function updateMovies() {
     })
 }
 
+
+$('.after-edit-close').click(function() {
+    window.close();
+});
+
 // allow users to edit movies
 function userEditMovie(e) {
 
@@ -51,6 +59,7 @@ function userEditMovie(e) {
     let cardBody = $(e.target).parent();
     let specificID = e.target.dataset.id;
     console.log(specificID);
+    $('.after-edit-close').show();
 
     let renderForm = `
         <div class="form-group mt-3">
@@ -95,6 +104,9 @@ function userEditMovie(e) {
 
 
 }
+
+
+
 
 function deleteFunction(e) {
     // let cardBody= $(e.target).parent();

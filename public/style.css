@@ -18,3 +18,8 @@ html, body {
     margin-bottom: 50px;
 }
 
+.after-edit-close{
+    display:none;
+    position: relative;
+
+}
