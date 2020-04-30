@@ -19,10 +19,10 @@ function updateMovies() {
         $('.card-deck').html('');
         movies.forEach(({title, rating, id}) => {
             let renderHTML =
-                `<div class="card">
+                `<div class="card specific-card" data-id="${id}">
                      <div class="card-body">
                         <div class="new-movie-title">
-                            <h5 id="movie-title" class="card-title"> ${title}</h5>
+                            <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
                          </div>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
                          <div>
@@ -73,11 +73,17 @@ function userEditMovie(e) {
 
     cardBody.append(renderForm);
 
+    $('.card').fadeOut();
+    //remember to change 'this' if we change the html structure for the edit button!
+    $(this).parent().parent().parent().fadeIn();
+
     $('.submit-edit-btn').click(function () {
         //get the data attr value
 
         $(this).attr('data-id', specificID);
-        $('.card-title').attr('class',specificID);
+        // $('.card-title').attr('class',specificID);
+        $('.movie-title').attr('data-id', specificID);
+
 
         let editRating = $('.edit-rating').val();
         let editTitle = $('.edit-title').val();
@@ -86,6 +92,8 @@ function userEditMovie(e) {
         editMovie(editTitle, editRating, specificID)
             .then(updateMovies) // run after ajax
     });
+
+
 }
 
 function deleteFunction(e) {
@@ -96,7 +104,6 @@ function deleteFunction(e) {
             .then(updateMovies);
     }
 }
-
 
 
 $(document).ready(() => {
@@ -120,6 +127,4 @@ $(document).ready(() => {
         $('.search-term').val('');
         updateMovies();
     });
-
-
 });
