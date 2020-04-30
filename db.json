@@ -6,39 +6,39 @@
       "id": 1
     },
     {
-      "title": "lord of the rings 2",
+      "title": "Star Wars : A New Hope",
+      "rating": "1",
+      "id": 2
+    },
+    {
+      "title": "Harry Potter",
       "rating": "1",
       "id": 3
     },
     {
-      "title": "lord of the rings 1",
+      "title": "Harry Potter 2",
       "rating": "1",
       "id": 4
     },
     {
-      "title": "lord of the rings 9",
+      "title": "Harry Potter 3",
       "rating": "1",
       "id": 5
     },
     {
-      "title": "lord of the rings 9",
+      "title": "Harry Potter 4",
       "rating": "1",
       "id": 6
     },
     {
-      "title": "lord of the rings 9",
+      "title": "Harry Potter 5",
       "rating": "1",
       "id": 7
     },
     {
-      "title": "lord of the rings 9",
+      "title": "Harry Potter 6",
       "rating": "1",
       "id": 8
-    },
-    {
-      "title": "lord of the rings 9",
-      "rating": "1",
-      "id": 9
     }
   ]
 }
