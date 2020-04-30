@@ -21,7 +21,7 @@ function updateMovies() {
             let renderHTML =
                 `<div class="card">
                      <div class="card-body">
-                         <h5 id="movie-title" class="card-title"> ${title}</h5>
+                         <h5 id="movie-title" class="card-title"> ${id}- ${title}</h5>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
                          <div>
                             <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
@@ -48,6 +48,7 @@ function userEditMovie(e) {
 
     let cardBody= $(e.target).parent();
     let specificID = e.target.dataset.id;
+    console.log(specificID);
 
         let renderForm = `
         <div class="form-group mt-3">
@@ -72,14 +73,13 @@ function userEditMovie(e) {
 
         $('.submit-edit-btn').click(function () {
             //get the data attr value
-            console.log(specificID);
                 $(this).attr('data-id', specificID);
             let editRating = $('.edit-rating').val();
             let editTitle =$('.edit-title').val();
             console.log(editTitle,editRating, specificID);
 
             editMovie(editTitle,editRating,specificID)
-                .then (updateMovies) // run after ajax
+                .then(updateMovies) // run after ajax
         });
 }
 
