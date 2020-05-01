@@ -41,7 +41,9 @@ function updateMovies() {
         $('.delete-btn').click(deleteFunction);
         $('.after-edit-close').click(function() {
             $('.card').show();
+            $('.after-edit-close').hide();
         });
+
 
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
