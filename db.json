@@ -1,16 +1,6 @@
 {
   "movies": [
     {
-      "title": "avengers",
-      "rating": "1",
-      "id": 10
-    },
-    {
-      "title": "harry potter 1",
-      "rating": "1",
-      "id": 11
-    },
-    {
       "title": "WORK",
       "rating": "1",
       "id": 12

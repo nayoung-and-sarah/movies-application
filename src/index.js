@@ -21,7 +21,7 @@ function updateMovies() {
             let renderHTML =
                 `<div class="card specific-card" data-id="${id}">
                      <div class="card-body">
-                        <button type="button" class="close after-edit-close" aria-label="Close">
+                        <button  type="button" class="close after-edit-close" aria-label="Close">
                            <span aria-hidden="true">&times;</span>
                          </button>
                         <div class="new-movie-title">
@@ -38,7 +38,11 @@ function updateMovies() {
         });
 
         $('.edit-btn').click(userEditMovie);
-        $('.delete-btn').click(deleteFunction)
+        $('.delete-btn').click(deleteFunction);
+        $('.after-edit-close').click(function() {
+            $('.card').show();
+        });
+
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
         console.log(error);
@@ -46,9 +50,6 @@ function updateMovies() {
 }
 
 
-$('.after-edit-close').click(function() {
-    window.close();
-});
 
 // allow users to edit movies
 function userEditMovie(e) {
@@ -101,6 +102,8 @@ function userEditMovie(e) {
         editMovie(editTitle, editRating, specificID)
             .then(updateMovies) // run after ajax
     });
+
+
 
 
 }
