@@ -42,6 +42,8 @@ function updateMovies() {
         $('.after-edit-close').click(function() {
             $('.card').show();
             $('.after-edit-close').hide();
+            $('.edit-form').hide();
+            $('.submit-edit-btn').hide();
         });
 
 
@@ -65,11 +67,11 @@ function userEditMovie(e) {
     $('.after-edit-close').show();
 
     let renderForm = `
-        <div class="form-group mt-3">
+        <div class="form-group edit-form mt-3">
              <label for="edit-form">Movie Title</label>
              <input type="text" class="form-control edit-form edit-title" id="${specificID}">
         </div>
-        <div class="form-group">
+        <div class="form-group edit-form">
             <label for="exampleFormControlSelect1"> Rating</label>
             <select class="form-control edit-rating" id="exampleFormControlSelect1">
                 <option>1</option>
