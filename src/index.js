@@ -44,6 +44,7 @@ function updateMovies() {
             $('.after-edit-close').hide();
             $('.edit-form').hide();
             $('.submit-edit-btn').hide();
+            $('.edit-btn').show();
         });
 
 
@@ -90,6 +91,7 @@ function userEditMovie(e) {
     $('.card').fadeOut();
     //remember to change 'this' if we change the html structure for the edit button!
     $(this).parent().parent().parent().fadeIn();
+    $('.edit-btn').hide();
 
     $('.submit-edit-btn').click(function () {
         //get the data attr value

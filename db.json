@@ -1,14 +1,19 @@
 {
   "movies": [
     {
-      "title": "WORK",
+      "title": "Harry Potter",
       "rating": "1",
       "id": 12
     },
     {
-      "title": "Harry Potter 3",
-      "rating": "4",
+      "title": "Harry Potter 2",
+      "rating": "1",
       "id": 13
+    },
+    {
+      "title": "Harry Potter 3",
+      "rating": "1",
+      "id": 14
     }
   ]
 }
