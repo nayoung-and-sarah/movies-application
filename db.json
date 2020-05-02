@@ -1,19 +1,24 @@
 {
   "movies": [
     {
-      "title": "Harry Potter",
-      "rating": "1",
-      "id": 12
-    },
-    {
-      "title": "Harry Potter 2",
-      "rating": "1",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "rating": "5",
       "id": 13
     },
     {
-      "title": "Harry Potter 3",
+      "title": "Harry Potter and the Goblet of Fire",
       "rating": "1",
       "id": 14
+    },
+    {
+      "title": "Harry Potter and the Order of the Phoenix ",
+      "rating": "1",
+      "id": 15
+    },
+    {
+      "title": "Star Wars : a New Hope",
+      "rating": "1",
+      "id": 16
     }
   ]
 }

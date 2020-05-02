@@ -12,6 +12,20 @@ const $ = require('jquery');
 
 const {getMovies, postMovie, editMovie, deleteMovie} = require('./api.js');
 
+// const {getOMDbMovies} = require('./OMDb-API.js');
+//
+// getOMDbMovies().then((movies)=>{
+//     console.log(movies);
+//     movies.forEach(({title,year,runTime}) =>{
+//         let renderOMDbHTML =
+//             `<div class="carousel-item active">
+//                 <img class="d-block w-100" src="..." alt="First slide">
+//             </div>`
+//         $('.carousel-inner').append(renderOMDbHTML);
+//     });
+//
+// })
+
 function updateMovies() {
     getMovies().then((movies) => {
         console.log('Here are all the movies:', movies);
@@ -41,10 +55,10 @@ function updateMovies() {
         $('.delete-btn').click(deleteFunction);
         $('.after-edit-close').click(function() {
             $('.card').show();
+            $('.edit-btn').show();
             $('.after-edit-close').hide();
             $('.edit-form').hide();
             $('.submit-edit-btn').hide();
-            $('.edit-btn').show();
         });
 
 
@@ -95,18 +109,19 @@ function userEditMovie(e) {
 
     $('.submit-edit-btn').click(function () {
         //get the data attr value
-
-        $(this).attr('data-id', specificID);
-        // $('.card-title').attr('class',specificID);
-        $('.movie-title').attr('data-id', specificID);
-
-
         let editRating = $('.edit-rating').val();
         let editTitle = $('.edit-title').val();
-        console.log(editTitle, editRating, specificID);
 
-        editMovie(editTitle, editRating, specificID)
-            .then(updateMovies) // run after ajax
+            $(this).attr('data-id', specificID);
+            // $('.card-title').attr('class',specificID);
+            $('.movie-title').attr('data-id', specificID);
+
+
+            console.log(editTitle, editRating, specificID);
+
+            editMovie(editTitle, editRating, specificID)
+                .then(updateMovies) // run after ajax
+
     });
 
 
@@ -133,6 +148,8 @@ $(document).ready(() => {
   <span class="sr-only">Loading...</span></div>`);
 
     updateMovies(); // render the HTML before button is clicked
+
+
 
     //click to post movie
     $('#submit').click(function (e) {
