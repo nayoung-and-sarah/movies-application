@@ -12,19 +12,11 @@ const $ = require('jquery');
 
 const {getMovies, postMovie, editMovie, deleteMovie} = require('./api.js');
 
-// const {getOMDbMovies} = require('./OMDb-API.js');
-//
-// getOMDbMovies().then((movies)=>{
-//     console.log(movies);
-//     movies.forEach(({title,year,runTime}) =>{
-//         let renderOMDbHTML =
-//             `<div class="carousel-item active">
-//                 <img class="d-block w-100" src="..." alt="First slide">
-//             </div>`
-//         $('.carousel-inner').append(renderOMDbHTML);
-//     });
-//
-// })
+
+const {getOMDbMovies} = require('./OMDb-API.js');
+let movieTitle = $('.search-term').val();
+
+
 
 function updateMovies() {
     getMovies().then((movies) => {
@@ -53,7 +45,7 @@ function updateMovies() {
 
         $('.edit-btn').click(userEditMovie);
         $('.delete-btn').click(deleteFunction);
-        $('.after-edit-close').click(function() {
+        $('.after-edit-close').click(function () {
             $('.card').show();
             $('.edit-btn').show();
             $('.after-edit-close').hide();
@@ -109,37 +101,39 @@ function userEditMovie(e) {
 
     $('.submit-edit-btn').click(function () {
         //get the data attr value
+        e.preventDefault();
         let editRating = $('.edit-rating').val();
         let editTitle = $('.edit-title').val();
 
-            $(this).attr('data-id', specificID);
-            // $('.card-title').attr('class',specificID);
-            $('.movie-title').attr('data-id', specificID);
+        $(this).attr('data-id', specificID);
+        // $('.card-title').attr('class',specificID);
+        $('.movie-title').attr('data-id', specificID);
 
 
-            console.log(editTitle, editRating, specificID);
+        console.log(editTitle, editRating, specificID);
 
-            editMovie(editTitle, editRating, specificID)
-                .then(updateMovies) // run after ajax
+        editMovie(editTitle, editRating, specificID)
+            .then(updateMovies) // run after ajax
 
     });
-
-
 
 
 }
 
 
-
-
 function deleteFunction(e) {
     // let cardBody= $(e.target).parent();
+    e.preventDefault();
     let specificID = e.target.dataset.id;
     if (confirm('Are you sure you want to delete this movie?')) {
         deleteMovie(specificID)
             .then(updateMovies);
     }
 }
+
+
+
+
 
 
 $(document).ready(() => {
@@ -149,6 +143,7 @@ $(document).ready(() => {
 
     updateMovies(); // render the HTML before button is clicked
 
+    console.log(movieTitle);
 
 
     //click to post movie
@@ -161,8 +156,11 @@ $(document).ready(() => {
         //access the object by using getMovies function
         postMovie(movieTitle, movieRating);
 
-
+        getOMDbMovies().then(function (e){
+            console.log('line 20 index.js: ', movieTitle);
+        })
         $('.search-term').val('');
+
         updateMovies();
     });
 });
