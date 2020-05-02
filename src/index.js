@@ -9,14 +9,9 @@ sayHello('World');
  * require style imports
  */
 const $ = require('jquery');
-
 const {getMovies, postMovie, editMovie, deleteMovie} = require('./api.js');
-
-
 const {getOMDbMovies} = require('./OMDb-API.js');
 let movieTitle = $('.search-term').val();
-
-
 
 function updateMovies() {
     getMovies().then((movies) => {
@@ -60,6 +55,21 @@ function updateMovies() {
     })
 }
 
+//OMDb Movies database
+function OMDbMovies() {
+    getOMDbMovies().then((data) => {
+        console.log(data);
+        console.log(data.Year);
+        console.log(data.Rated);
+        console.log(data.Director);
+        console.log(data.Actors);
+        console.log(data.Awards);
+        console.log(data.plot);
+        console.log(data.Runtime);
+        console.log(data.imdbRating);
+        }
+    )
+}
 
 
 // allow users to edit movies
@@ -156,9 +166,8 @@ $(document).ready(() => {
         //access the object by using getMovies function
         postMovie(movieTitle, movieRating);
 
-        getOMDbMovies().then(function (e){
-            console.log('line 20 index.js: ', movieTitle);
-        })
+        OMDbMovies();
+
         $('.search-term').val('');
 
         updateMovies();

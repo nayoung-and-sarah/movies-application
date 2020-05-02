@@ -2,14 +2,14 @@ const {OMDb_API} = require('./keys.js');
 let movieTitle =  $('.search-term').val();
 
 module.exports = {
-    getOMDbMovies: (title,synposis) =>{
-        let movieTitle =  $('.search-term').val();
+    getOMDbMovies: (title, synposis) => {
+        let movieTitle = $('.search-term').val();
         // return fetch(`http://www.omdbapi.com/?&apikey=${OMDb_API}&t=${movieTitle}`)
         return fetch(`http://www.omdbapi.com/?&apikey=${OMDb_API}&t=${movieTitle}`)
             .then(response => response.json())
-            .then(data => console.log(data));
-    },
-};
+    }
+}
+
 
 
 // function getMovie() {
