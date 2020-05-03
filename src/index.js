@@ -111,6 +111,9 @@ function userEditMovie(e) {
 
         editMovie(editTitle, editRating, specificID)
             .then(updateMovies) // run after ajax
+                .then(
+                    $('.submit-new-movie').fadeIn(5000)
+                )
     });
 
 
