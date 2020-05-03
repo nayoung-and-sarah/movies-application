@@ -18,13 +18,14 @@ function updateMovies() {
         $('#spinner').hide();
         $('.card-deck').html('');
         movies.forEach(({title, rating, id}) => {
-            let renderHTML =
+            function renderHTML() {
+                let html =
                 `<div class="card specific-card" data-id="${id}">
                      <div class="card-body">
                         <button  type="button" class="close after-edit-close" aria-label="Close">
-                           <span aria-hidden="true">&times;</span>
-                         </button>
-                        <div class="new-movie-title">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                         <div class="new-movie-title">
                             <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
                          </div>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
@@ -32,8 +33,10 @@ function updateMovies() {
                              <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
                              <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
                          </div>
-                    </div>
-               </div>`;
+                     </div>
+                </div>`;
+                return html;
+            }
             $('.card-deck').append(renderHTML);
         });
 
@@ -92,6 +95,7 @@ function userEditMovie(e) {
     //remember to change 'this' if we change the html structure for the edit button!
     $(this).parent().parent().parent().fadeIn();
     $('.edit-btn').hide();
+    $('.submit-new-movie').hide();
 
     $('.submit-edit-btn').click(function () {
         //get the data attr value

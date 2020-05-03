@@ -6,14 +6,24 @@
       "id": 12
     },
     {
-      "title": "Harry Potter 2",
-      "rating": "1",
+      "title": "Matrix",
+      "rating": "3",
       "id": 13
     },
     {
-      "title": "Harry Potter 3",
-      "rating": "1",
+      "title": "Inception",
+      "rating": "4",
       "id": 14
+    },
+    {
+      "title": "Shawshank Redemption",
+      "rating": "5",
+      "id": 15
+    },
+    {
+      "title": "Skyfall",
+      "rating": "2",
+      "id": 16
     }
   ]
 }
