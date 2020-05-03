@@ -112,8 +112,8 @@ function OMDbMoviesFunction(e) {
 // allow users to edit movies
 function userEditMovie(e) {
 
-console.log(e.target.dataset.id);
-console.log($(e.target).parent());
+    console.log(e.target.dataset.id);
+    console.log($(e.target).parent());
 
     let cardBody = $(e.target).parent();
     let specificID = e.target.dataset.id;
