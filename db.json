@@ -1,29 +1,39 @@
 {
   "movies": [
     {
-      "title": "monsters inc",
-      "rating": "1",
-      "id": 8
-    },
-    {
-      "title": "inception",
-      "rating": "1",
-      "id": 9
-    },
-    {
-      "title": "avengers",
+      "title": "The Lighthouse",
       "rating": "1",
       "id": 10
     },
     {
-      "title": "harry potter 1",
-      "rating": "1",
+      "title": "Inception",
+      "rating": "4",
       "id": 11
     },
     {
-      "title": "WORK",
-      "rating": "1",
+      "title": "Sherlock Holmes",
+      "rating": "3",
       "id": 12
+    },
+    {
+      "title": "Shawshank Redemption",
+      "rating": "5",
+      "id": 13
+    },
+    {
+      "title": "Batman v Superman",
+      "rating": "2",
+      "id": 14
+    },
+    {
+      "title": "Wonder Woman",
+      "rating": "4",
+      "id": 15
+    },
+    {
+      "title": "Red",
+      "rating": "3",
+      "id": 16
     }
   ]
 }
