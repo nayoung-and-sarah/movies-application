@@ -13,20 +13,33 @@ function updateMovies() {
         movies.forEach(({title, rating, id}) => {
             console.log(`id#${id} - ${title} - rating: ${rating}`);
             // render cards
-            let renderHTML = `<div class="card specific-card" data-id="${id}">`;
-            renderHTML += `<div class="card-body">`;
-            renderHTML += `<h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>`;
-            renderHTML += `<p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>`;
-            renderHTML += `<div>`;
-            renderHTML += `<button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>`;
-            renderHTML += `<button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>`;
-            renderHTML += `</div>`;
-            renderHTML += `</div>`;
-            renderHTML += `</div>`;
+            function renderHTML() {
+                let html =
+                `<div class="card specific-card" data-id="${id}">
+                     <div class="card-body">
+                        <button  type="button" class="close after-edit-close" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
+                         <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
+                         <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
+                         <div>
+                             <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
+                             <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
+                         </div>
+                    </div>
+                </div>`;
+                return html;
+            }
             $('.card-deck').append(renderHTML);
+            $('.after-edit-close').hide();
+
         });
-        $('.delete-btn').click(deleteFunction);
+
         $('.edit-btn').click(userEditMovie);
+        $('.delete-btn').click(deleteFunction);
+        $('.after-edit-close').click(afterEditCloseFunction);
+
+
         // $('.submit-edit-btn').click(submitEditFunction);
     }).catch((error) => {
         alert('Oh no! Something went wrong.\nCheck the console for details.')
@@ -40,40 +53,41 @@ function userEditMovie(e) {
     let cardBody = $(e.target).parent();
     let specificID = e.target.dataset.id;
     console.log(specificID);
+    $('.after-edit-close').show();
     // render form to edit movie
     function renderForm() {
-        let html = `<div class="form-group mt-3">`;
-        html += `<label for="edit-form">Movie Title</label>`;
-        html += `<input type="text" class="form-control edit-form edit-title" id="${specificID}">`;
-        html += `</div>`;
-        html += `<div class="form-group">`;
-        html += `<label for="exampleFormControlSelect1"> Rating</label>`;
-        html += `<select class="form-control edit-rating" id="exampleFormControlSelect1">`;
-        html += `<option>1</option>`;
-        html += `<option>2</option>`;
-        html += `<option>3</option>`;
-        html += `<option>4</option>`;
-        html += `<option>5</option>`;
-        html += `</select>`;
-        html += `</div>`;
-        html += `<div class="edit-btn-submit">`;
-        html += `<button class="btn btn-outline-dark submit-edit-btn" data-id="${specificID}">Submit edits</button>`;
-        html += `</div>`;
+       let html =
+        `<div class="form-group edit-form mt-3">
+             <label for="edit-form" id="edit-movie-title">Movie Title</label>
+             <input type="text" class="form-control edit-form edit-title" id="${specificID}">
+        </div>
+        <div class="form-group edit-form">
+            <label for="exampleFormControlSelect1" id="edit-movie-rating"> Rating</label>
+            <select class="form-control edit-rating" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+             </select>
+        </div>
+        <div class="edit-btn-submit">
+            <button class="btn btn-outline-dark submit-edit-btn" data-id="${specificID}">Submit edits</button>
+        </div>`;
 
-        return html;
+       return html;
     }
     cardBody.append(renderForm);
 
-    //when the edit button is clicked, that button and the delete button disappear...
-    $(this).css('display', 'none');
-    $('.delete-btn').css('display', 'none');
+    //when the edit button is clicked, that button disappears...
+    $(this).hide();
 
-    //..other cards disappear, then the chosen card's form appears...
+    //..the other cards disappear, then the chosen card's form appears...
     $('.card').fadeOut();
     $(this).parent().parent().parent().fadeIn();
 
     //..while the new movie form disappears.
-    $('.submit-new-movie').css('display', 'none');
+    $('.submit-new-movie').hide();
 
     //when the submit-edit button is clicked, a new card is generated
     $('.submit-edit-btn').click(function() {
@@ -89,6 +103,20 @@ function userEditMovie(e) {
                     $('.submit-new-movie').fadeIn(5000)
                 )
     });
+}
+
+function afterEditCloseFunction(e) {
+    // e.preventDefault();
+    $('.card').show();
+    $('.after-edit-close').hide();
+    $('.edit-title').hide();
+    $('.edit-rating').hide();
+    $('.edit-form').hide();
+    // $('#edit-movie-title').hide();
+    // $('#edit-movie-rating').hide();
+    $('.submit-edit-btn').hide();
+
+    $('.edit-btn').show();
 }
 
 //allow users to delete movies
@@ -107,6 +135,7 @@ $(document).ready(() => {
     // render the HTML before button is clicked
     updateMovies();
 
+
     // submit-post button
     $('#submit').click(function (e) {
         e.preventDefault();
@@ -116,6 +145,8 @@ $(document).ready(() => {
         //call the postMovie (POST) ajax
         postMovie(movieTitle, movieRating)
             .then(updateMovies)
+
+        //after submitting a new movie, the input box's value becomes empty
         $('.search-term').val('');
 
     });
