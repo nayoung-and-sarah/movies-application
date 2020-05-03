@@ -1,39 +1,14 @@
 {
   "movies": [
     {
-      "title": "Harry Potter and the Sorcerer's Stone",
-      "rating": "5",
-      "id": 13
-    },
-    {
-      "title": "Harry Potter and the Goblet of Fire",
+      "title": "The Godfather",
       "rating": "1",
-      "id": 14
-    },
-    {
-      "title": "Harry Potter and the Order of the Phoenix ",
-      "rating": "1",
-      "id": 15
+      "id": 2
     },
     {
       "title": "The Godfather",
       "rating": "1",
-      "id": 16
-    },
-    {
-      "title": "Star Wars",
-      "rating": "1",
-      "id": 17
-    },
-    {
-      "title": "Guardians of the Galaxy",
-      "rating": "1",
-      "id": 18
-    },
-    {
-      "title": "Batman",
-      "rating": "1",
-      "id": 19
+      "id": 3
     }
   ]
 }

@@ -11,6 +11,7 @@ sayHello('World');
 const $ = require('jquery');
 const {getMovies, postMovie, editMovie, deleteMovie} = require('./api.js');
 const {getOMDbMovies} = require('./OMDb-API.js');
+const {OMDb_API} = require('./keys.js');
 let movieTitle = $('.search-term').val();
 
 function updateMovies() {
@@ -29,17 +30,51 @@ function updateMovies() {
                             <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
                          </div>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
+                         <div id="OMDb-API-INFO">
+                         
+                         </div>
                          <div>
                              <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
                              <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
+                             <button data-id="${id}" class ="btn btn-sm btn-outline-info more-info-btn">More Info</button>
                          </div>
                     </div>
-               </div>`;
+               </div>`
             $('.card-deck').append(renderHTML);
         });
 
         $('.edit-btn').click(userEditMovie);
         $('.delete-btn').click(deleteFunction);
+
+
+        // $('.more-info-btn').click(function (updateMovies) {
+        //
+        //     let moreInfoOMDBMovieTitle = $('.new-movie-title').text();
+        //     console.log(moreInfoOMDBMovieTitle)
+        //         getMovies().then((movies) => {
+        //                 for (var i =0; i < 3; i++){
+        //                     console.log( movies[i].title);
+        //                 }
+        //             })
+        //         .then(fetch(`http://www.omdbapi.com/?&apikey=${OMDb_API}&t=${moreInfoOMDBMovieTitle}`)
+        //             .then(response => response.json()))
+        // });
+        // getOMDbMovies().then((data) => {
+        // let ombdHTML =
+        //     `<div class="OMDb-DB">
+        //          <p id="year">${data.Year}</p>
+        //          <p id="rated">${data.Rated}</p>
+        //          <p id="director">${data.Director}</p>
+        //          <p id="actors">${data.Actors}</p>
+        //          <p id="Awards">${data.Awards}</p>
+        //          <p id="plot">${data.Plot}</p>
+        //          <p id="runtime">${data.Runtime}</p>
+        //          <p id="imdb-rating">${data.imdbRating}</p>
+        //         </div>`
+        // $('#omdb-info').append(ombdHTML);
+
+
+        $('.more-info-btn').click(OMDbMoviesFunction);
         $('.after-edit-close').click(function () {
             $('.card').show();
             $('.edit-btn').show();
@@ -47,26 +82,28 @@ function updateMovies() {
             $('.edit-form').hide();
             $('.submit-edit-btn').hide();
         });
-
-
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
         console.log(error);
     })
 }
 
-//OMDb Movies database
-function OMDbMovies() {
+//OMDb Movies database prints to the log
+function OMDbMoviesFunction(e) {
     getOMDbMovies().then((data) => {
-        console.log(data);
-        console.log(data.Year);
-        console.log(data.Rated);
-        console.log(data.Director);
-        console.log(data.Actors);
-        console.log(data.Awards);
-        console.log(data.plot);
-        console.log(data.Runtime);
-        console.log(data.imdbRating);
+            console.log(data);
+            let ombdHTML =
+                `<div class="OMDb-DB">
+                         <p id="year">Release date: ${data.Year}</p>
+                         <p id="rated">Rated: ${data.Rated}</p>
+                         <p id="director">Director: ${data.Director}</p>
+                         <p id="actors">Cast: ${data.Actors}</p>
+                         <p id="Awards">Awards: ${data.Awards}</p>
+                         <p id="plot">Plot: ${data.Plot}</p>
+                         <p id="runtime">Runtime: ${data.Runtime}</p>
+                         <p id="imdb-rating">imdb Rating: ${data.imdbRating}</p>
+                        </div>`
+            $('#omdb-info').append(ombdHTML);
         }
     )
 }
@@ -75,8 +112,8 @@ function OMDbMovies() {
 // allow users to edit movies
 function userEditMovie(e) {
 
-// console.log(e.target.dataset.id);
-//     console.log($(e.target).parent());
+console.log(e.target.dataset.id);
+console.log($(e.target).parent());
 
     let cardBody = $(e.target).parent();
     let specificID = e.target.dataset.id;
@@ -126,8 +163,6 @@ function userEditMovie(e) {
             .then(updateMovies) // run after ajax
 
     });
-
-
 }
 
 
@@ -140,11 +175,6 @@ function deleteFunction(e) {
             .then(updateMovies);
     }
 }
-
-
-
-
-
 
 $(document).ready(() => {
     //loading spinner
@@ -165,10 +195,8 @@ $(document).ready(() => {
 
         //access the object by using getMovies function
         postMovie(movieTitle, movieRating);
-
-        OMDbMovies();
-
         $('.search-term').val('');
+
 
         updateMovies();
     });
