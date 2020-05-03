@@ -6,9 +6,14 @@
       "id": 2
     },
     {
-      "title": "The Godfather",
+      "title": "Guardians of the Galaxy",
       "rating": "1",
       "id": 3
+    },
+    {
+      "title": "Shawshank redemption",
+      "rating": "1",
+      "id": 5
     }
   ]
 }
