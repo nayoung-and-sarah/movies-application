@@ -30,9 +30,7 @@ function updateMovies() {
                             <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
                          </div>
                          <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
-                         <div id="OMDb-API-INFO">
-                         
-                         </div>
+                         <div id="OMDb-API-INFO"></div>
                          <div>
                              <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
                              <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
@@ -79,7 +77,7 @@ function OMDbMoviesFunction(e) {
                      <p id="runtime">Runtime: ${data.Runtime}</p>
                      <p id="imdb-rating">imdb Rating: ${data.imdbRating}</p>
                     </div>`
-                    $('#OMDb-API-INFO').append(ombdHTML);
+                    $('.card-body').append(ombdHTML);
                 });
         }
     })
