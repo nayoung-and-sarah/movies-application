@@ -39,39 +39,27 @@ function updateMovies() {
             }
             $('.card-deck').append(renderHTML);
         });
-
         $('.edit-btn').click(userEditMovie);
         $('.delete-btn').click(deleteFunction);
-        $('.after-edit-close').click(function() {
-            $('.card').show();
-            $('.after-edit-close').hide();
-            $('.edit-form').hide();
-            $('.submit-edit-btn').hide();
-            $('.edit-btn').show();
-        });
-
-
+        $('.after-edit-close').click(afterEditCloseFunction);
     }).catch((error) => {
         alert('Oh no! Something went wrong. Check the console for details.');
         console.log(error);
     })
 }
 
-
-
 // allow users to edit movies
 function userEditMovie(e) {
-
-// console.log(e.target.dataset.id);
-//     console.log($(e.target).parent());
-
+    // console.log(e.target.dataset.id);
+    // console.log($(e.target).parent());
     let cardBody = $(e.target).parent();
     let specificID = e.target.dataset.id;
     console.log(specificID);
     $('.after-edit-close').show();
 
-    let renderForm = `
-        <div class="form-group edit-form mt-3">
+    function renderForm() {
+        let html =
+        `<div class="form-group edit-form mt-3">
              <label for="edit-form">Movie Title</label>
              <input type="text" class="form-control edit-form edit-title" id="${specificID}">
         </div>
@@ -89,6 +77,8 @@ function userEditMovie(e) {
             <button class="btn btn-outline-dark submit-edit-btn" data-id="${specificID}">Submit edits</button>
         </div>`;
 
+        return html;
+    }
     cardBody.append(renderForm);
 
     $('.card').fadeOut();
@@ -98,34 +88,30 @@ function userEditMovie(e) {
     $('.submit-new-movie').hide();
 
     $('.submit-edit-btn').click(function () {
-        //get the data attr value
-
         $(this).attr('data-id', specificID);
-        // $('.card-title').attr('class',specificID);
         $('.movie-title').attr('data-id', specificID);
-
 
         let editRating = $('.edit-rating').val();
         let editTitle = $('.edit-title').val();
         console.log(editTitle, editRating, specificID);
 
         editMovie(editTitle, editRating, specificID)
-            .then(updateMovies) // run after ajax
+            .then(updateMovies)
                 .then(
                     $('.submit-new-movie').fadeIn(5000)
                 )
     });
-
-
-
-
 }
 
-
-
+function afterEditCloseFunction() {
+    $('.card').show();
+    $('.after-edit-close').hide();
+    $('.edit-form').hide();
+    $('.submit-edit-btn').hide();
+    $('.edit-btn').show();
+}
 
 function deleteFunction(e) {
-    // let cardBody= $(e.target).parent();
     let specificID = e.target.dataset.id;
     if (confirm('Are you sure you want to delete this movie?')) {
         deleteMovie(specificID)
@@ -146,13 +132,13 @@ $(document).ready(() => {
         e.preventDefault();
         let movieTitle = $('.search-term').val();
         let movieRating = $('.movie-rating').val();
-        console.log(movieTitle, movieRating);
+        // console.log(movieTitle, movieRating);
 
-        //access the object by using getMovies function
-        postMovie(movieTitle, movieRating);
-
+        //call the postMovie (POST) ajax
+        postMovie(movieTitle, movieRating)
+            .then(updateMovies)
 
         $('.search-term').val('');
-        updateMovies();
+
     });
 });

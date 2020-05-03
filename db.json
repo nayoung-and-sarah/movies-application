@@ -1,16 +1,6 @@
 {
   "movies": [
     {
-      "title": "Harry Potter",
-      "rating": "1",
-      "id": 12
-    },
-    {
-      "title": "Matrix",
-      "rating": "3",
-      "id": 13
-    },
-    {
       "title": "Inception",
       "rating": "4",
       "id": 14
@@ -21,9 +11,14 @@
       "id": 15
     },
     {
-      "title": "Skyfall",
+      "title": "Casino Royale",
       "rating": "2",
       "id": 16
+    },
+    {
+      "title": "Star Trek",
+      "rating": "5",
+      "id": 18
     }
   ]
 }
