@@ -1,10 +1,3 @@
-
-//
-// const newMovie = {
-//     "title": inputValue,
-//     "rating": 5
-// };
-
 module.exports = {
 
     getMovies: (title, rating) => {

@@ -114,7 +114,6 @@ function deleteFunction(e) {
                     $('.submit-new-movie').fadeIn(5000)
                     )
     }
-
 }
 
 function afterEditCloseFunction() {
@@ -125,7 +124,6 @@ function afterEditCloseFunction() {
     $('.edit-btn').show();
     $('.submit-new-movie').show();
 }
-
 
 $(document).ready(() => {
     //loading spinner
