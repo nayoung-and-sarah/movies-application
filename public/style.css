@@ -1,5 +1,13 @@
-html, body {
+html {
     height: 100%;
+}
+
+body {
+    height: 100%;
+    background-image: url("img/theater-curtain.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .container {
@@ -8,10 +16,7 @@ html, body {
     /*transform: translateY(-20%);*/
     text-align: center;
     min-height: 100%;
-    background-image: url("https://ak.picdn.net/shutterstock/videos/16548589/thumb/1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+
 }
 
 .card-deck {
