@@ -16,29 +16,10 @@ function updateMovies() {
     getMovies().then((movies) => {
         console.log('Here are all the movies:', movies);
         $('#spinner').hide();
+
         $('.card-deck').html('');
-        movies.forEach(({title, rating, id}) => {
-            function renderHTML() {
-                let html =
-                `<div class="card specific-card" data-id="${id}">
-                     <div class="card-body">
-                        <button  type="button" class="close after-edit-close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                         <div class="new-movie-title">
-                            <h5 data-id="${id}" class="card-title movie-title"> ${title}</h5>
-                         </div>
-                         <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
-                         <div>
-                             <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
-                             <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
-                         </div>
-                     </div>
-                </div>`;
-                return html;
-            }
-            $('.card-deck').append(renderHTML);
-        });
+        renderMovies(movies);
+
         $('.edit-btn').click(userEditMovie);
         $('.delete-btn').click(deleteFunction);
         $('.after-edit-close').click(afterEditCloseFunction);
@@ -48,17 +29,61 @@ function updateMovies() {
     })
 }
 
+function renderMovies(movies) {
+    movies.forEach(({title, rating, id}) => {
+            let renderHTML =
+                `<div class="card specific-card" data-id="${id}">
+                     <div class="card-body">
+                        <button  type="button" class="close after-edit-close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                         <div class="new-movie-title">
+                            <h5 class="card-title movie-title"> ${title}</h5>
+                         </div>
+                         <p id="movie-rating" class="card-text user-edit-rating">Rating: ${rating}</p>
+                         <div>
+                             <button data-id="${id}" class="btn btn-sm btn-outline-dark edit-btn mr-1">Edit Movie</button>
+                             <button data-id="${id}" class="btn btn-sm btn-outline-danger delete-btn">Delete Movie</button>
+                         </div>
+                     </div>
+                </div>`;
+        $('.card-deck').append(renderHTML);
+    });
+}
+
 // allow users to edit movies
 function userEditMovie(e) {
-    // console.log(e.target.dataset.id);
-    // console.log($(e.target).parent());
+    renderForm(e);
+
+    $('.card').fadeOut();
+    //remember to change 'this' if we change the html structure for the edit button!
+    $(this).parent().parent().parent().fadeIn();
+    $('.edit-btn').hide();
+    $('.submit-new-movie').hide();
+
+    $('.submit-edit-btn').click(function () {
+        let specificID = e.target.dataset.id;
+        $(this).attr('data-id', specificID);
+
+        let editRating = $('.edit-rating').val();
+        let editTitle = $('.edit-title').val();
+        console.log(editTitle, editRating, specificID);
+
+        editMovie(editTitle, editRating, specificID)
+            .then(updateMovies)
+                .then(
+                    $('.submit-new-movie').fadeIn(5000)
+                )
+    });
+}
+
+function renderForm(e) {
     let cardBody = $(e.target).parent();
     let specificID = e.target.dataset.id;
-    console.log(specificID);
+    // console.log(specificID);
     $('.after-edit-close').show();
 
-    function renderForm() {
-        let html =
+    let html =
         `<div class="form-group edit-form mt-3">
              <label for="edit-form">Movie Title</label>
              <input type="text" class="form-control edit-form edit-title" id="${specificID}">
@@ -77,30 +102,19 @@ function userEditMovie(e) {
             <button class="btn btn-outline-dark submit-edit-btn" data-id="${specificID}">Submit edits</button>
         </div>`;
 
-        return html;
-    }
-    cardBody.append(renderForm);
+    cardBody.append(html);
+}
 
-    $('.card').fadeOut();
-    //remember to change 'this' if we change the html structure for the edit button!
-    $(this).parent().parent().parent().fadeIn();
-    $('.edit-btn').hide();
-    $('.submit-new-movie').hide();
-
-    $('.submit-edit-btn').click(function () {
-        $(this).attr('data-id', specificID);
-        $('.movie-title').attr('data-id', specificID);
-
-        let editRating = $('.edit-rating').val();
-        let editTitle = $('.edit-title').val();
-        console.log(editTitle, editRating, specificID);
-
-        editMovie(editTitle, editRating, specificID)
+function deleteFunction(e) {
+    let specificID = e.target.dataset.id;
+    if (confirm('Are you sure you want to delete this movie?')) {
+        deleteMovie(specificID)
             .then(updateMovies)
                 .then(
                     $('.submit-new-movie').fadeIn(5000)
-                )
-    });
+                    )
+    }
+
 }
 
 function afterEditCloseFunction() {
@@ -109,14 +123,7 @@ function afterEditCloseFunction() {
     $('.edit-form').hide();
     $('.submit-edit-btn').hide();
     $('.edit-btn').show();
-}
-
-function deleteFunction(e) {
-    let specificID = e.target.dataset.id;
-    if (confirm('Are you sure you want to delete this movie?')) {
-        deleteMovie(specificID)
-            .then(updateMovies);
-    }
+    $('.submit-new-movie').show();
 }
 
 
@@ -139,6 +146,6 @@ $(document).ready(() => {
             .then(updateMovies)
 
         $('.search-term').val('');
-
     });
 });
+
