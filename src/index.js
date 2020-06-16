@@ -187,5 +187,6 @@ $(document).ready(() => {
         $('.search-term').val('');
 
         updateMovies();
+
     });
 });

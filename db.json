@@ -1,11 +1,6 @@
 {
   "movies": [
     {
-      "title": "The Godfather",
-      "rating": "1",
-      "id": 2
-    },
-    {
       "title": "Guardians of the Galaxy",
       "rating": "1",
       "id": 3
@@ -14,6 +9,11 @@
       "title": "Shawshank redemption",
       "rating": "1",
       "id": 5
+    },
+    {
+      "title": "the godfather",
+      "rating": "1",
+      "id": 6
     }
   ]
 }
